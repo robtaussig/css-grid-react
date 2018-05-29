@@ -1,12 +1,30 @@
 {
-  "name": "css-grid-react",
-  "version": "1.0.0",
+  "name": "css-grid-components",
+  "version": "1.0.1",
   "description": "Get the benefits and flexibility of CSS Grid through lightweight react components",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["react", "css", "css-grid", "grid", "components", "containers"],
+  "keywords": [
+    "react",
+    "css",
+    "css-grid",
+    "grid",
+    "components",
+    "containers"
+  ],
   "author": "Robert Taussig<robert.taussig@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@types/react": "^16.3.14",
+    "@types/react-dom": "^16.0.5",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.0.0",
+    "source-map-loader": "^0.2.3",
+    "typescript": "^2.8.3"
+  }
 }
