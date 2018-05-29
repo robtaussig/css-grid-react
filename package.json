@@ -1,0 +1,12 @@
+{
+  "name": "css-grid-react",
+  "version": "1.0.0",
+  "description": "Get the benefits and flexibility of CSS Grid through lightweight react components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["react", "css", "css-grid", "grid", "components", "containers"],
+  "author": "Robert Taussig<robert.taussig@gmail.com>",
+  "license": "MIT"
+}
