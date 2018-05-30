@@ -2,7 +2,7 @@
   "name": "css-grid-components",
   "version": "1.0.6",
   "description": "Get the benefits and flexibility of CSS Grid through lightweight react components",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --watch",
