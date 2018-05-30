@@ -26,13 +26,15 @@ module.exports = class Grid extends React.Component {
     const gridTemplate = this.getGridTemplateFromChildren();
     return {
       display: 'grid',
-      gridTemplate: gridTemplate
+      gridTemplate: gridTemplate,
+      height: '100%',
+      width: '100%',
     };
   }
 
   generateGridStore() {    
     const children = ensureTypeArray(this.props.children);
-    const nextGridStore = getInformationFromChildren(children);
+    const nextGridStore = getInformationFromChildren(children, this.props.columns);
 
     this.setState({
       store: nextGridStore
@@ -44,7 +46,7 @@ module.exports = class Grid extends React.Component {
     const rows = getRowTemplateFromChildren(children);
     const columns = getColumnTemplateFromChildren(children);
 
-    return `${rows} / ${columns}`;
+    return this.props.columns ? `${columns} / ${rows}` : `${rows} / ${columns}`;
   }
 
   render() {

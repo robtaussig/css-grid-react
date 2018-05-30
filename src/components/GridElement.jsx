@@ -1,13 +1,15 @@
 const React = require('react');
 const { Consumer } = require('./GridContext');
+const Grid = require('./Grid');
 const {
   getElementInfoFromStore,
   getElementStyle,
-  elementHasChildren
+  elementHasGridChildren
 } = require('../helpers/');
 
 const defaultStyle = {
-  border: '1px solid black'
+  border: '1px solid black',
+  margin: '-1px'
 };
 
 module.exports = class GridElement extends React.Component {
@@ -16,33 +18,44 @@ module.exports = class GridElement extends React.Component {
     this.generateStyle = this.generateStyle.bind(this);
   }
 
+  applyPropertyModifiers() {
+    const styles = {};
+    if (this.props.centered) {
+      styles.display = 'flex';
+      styles.justifyContent = 'center';
+      styles.alignItems = 'center';
+    }
+    return styles;
+  }
+
   generateStyle(store) {
     const elementInfo = getElementInfoFromStore(store, this.props);
-
     if (elementInfo) {
       const elementStyle = getElementStyle(elementInfo);
-      return Object.assign({}, defaultStyle, elementStyle);
+      const propertyModifiers = this.applyPropertyModifiers();
+      return Object.assign({}, defaultStyle, elementStyle, propertyModifiers);
     }
 
     return defaultStyle;
   }
 
-  setPositionInGrid(col, row) {
-    this.setState({ col, row });
-  }
-
   render() {
-    const isRow = Boolean(this.props.row);
-    const hasChildren = elementHasChildren(this.props);
-    const shouldNotWrap = isRow && hasChildren;
+    const hasGridChildren = elementHasGridChildren(this.props);
 
     return (
       <Consumer>
-        {store => shouldNotWrap ? this.props.children : (
-          <div style={this.generateStyle(store)}>
-            {this.props.children}
-          </div>
-        )}
+        {store => hasGridChildren ?
+          (<div style={this.generateStyle(store)}>
+            <Grid columns={Boolean(this.props.columns)}>
+              {this.props.children}
+            </Grid>
+          </div>) : 
+          (
+            <div style={this.generateStyle(store)}>
+              {this.props.children}
+            </div>
+          )
+        }
       </Consumer>
     );
   }
