@@ -1,6 +1,6 @@
 const React = require('react');
-const { Consumer } = require('./GridContext');
-const Grid = require('./Grid');
+const { Consumer } = require('./GridContext.jsx');
+const Grid = require('./Grid.jsx');
 const {
   getElementInfoFromStore,
   getElementStyle,

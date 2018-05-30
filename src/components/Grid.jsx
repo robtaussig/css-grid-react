@@ -1,5 +1,5 @@
 const React = require('react');
-const { Provider } = require('./GridContext');
+const { Provider } = require('./GridContext.jsx');
 const {
   ensureTypeArray,
   getInformationFromChildren,
