@@ -1,6 +1,6 @@
 {
   "name": "css-grid-components",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Get the benefits and flexibility of CSS Grid through lightweight react components",
   "main": "build/index.js",
   "scripts": {
