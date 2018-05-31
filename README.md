@@ -8,7 +8,7 @@
 yarn add css-grid-components
 ```
 
-### Useage
+### Usage
 
 ```
 import React from 'react';
