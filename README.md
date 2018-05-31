@@ -195,3 +195,5 @@ Any - Required. Should be unique to each GridElement, but in theory can be used 
 #### centered
 [Boolean = false] - Only accepted by leaf node (no children). Centers inner content of GridElement
 ![Centered](docs/centered.png "Centered")
+#### outlined
+[Boolean = false] - Outline grid elements with a border (sets margin to -1px so that borders do not stack on top of each other). Recommended for testing only

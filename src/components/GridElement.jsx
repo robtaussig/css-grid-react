@@ -7,11 +7,6 @@ const {
   elementHasGridChildren
 } = require('../helpers/');
 
-const defaultStyle = {
-  border: '1px solid black',
-  margin: '-1px'
-};
-
 module.exports = class GridElement extends React.Component {
   constructor(props) {
     super(props);
@@ -25,6 +20,10 @@ module.exports = class GridElement extends React.Component {
       styles.justifyContent = 'center';
       styles.alignItems = 'center';
     }
+    if (this.props.outlined) {
+      styles.border = '1px solid black';
+      styles.margin = '-1px';
+    }
     return styles;
   }
 
@@ -33,10 +32,10 @@ module.exports = class GridElement extends React.Component {
     if (elementInfo) {
       const elementStyle = getElementStyle(elementInfo);
       const propertyModifiers = this.applyPropertyModifiers();
-      return Object.assign({}, defaultStyle, elementStyle, propertyModifiers);
+      return Object.assign({}, elementStyle, propertyModifiers);
     }
 
-    return defaultStyle;
+    return {};
   }
 
   render() {
