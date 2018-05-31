@@ -187,7 +187,7 @@ New grid elements can be created with minimal work required from the Grid. Inste
 #### gridKey
 Any - Required. Should be unique to each GridElement, but in theory can be used to reuse styling/position for multiple GridElements, since GridElements use their gridKey to obtain information about their position/dimensions. Recommended to stick to strictly unique schema.
 #### columns
-[Boolean = false]
+[Boolean = false] - Aligns children as columns instead of defaulting to rows.
 #### width
 [String] - Anything accepted as a unit for the css property `grid-template-columns` ('fr', 'px', etc)
 #### height
