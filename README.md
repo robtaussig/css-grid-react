@@ -184,9 +184,14 @@ None. Grid is used as a wrapper for React's Context API. It passes a 'gridStore'
 New grid elements can be created with minimal work required from the Grid. Instead of frequently checking the tree for new child nodes, it passes a callback to Consumers to call when they mount. The callback provides any information relevant to the Grid to update the gridStore.
 
 ### GridElement
+#### gridKey
+Any - Required. Should be unique to each GridElement, but in theory can be used to reuse styling/position for multiple GridElements, since GridElements use their gridKey to obtain information about their position/dimensions. Recommended to stick to strictly unique schema.
 #### columns
 [Boolean = false]
 #### width
 [String] - Anything accepted as a unit for the css property `grid-template-columns` ('fr', 'px', etc)
 #### height
 [String] - Anything accepted as a unit for the css property `grid-template-rows` ('fr', 'px', etc)
+#### centered
+[Boolean = false] - Only accepted by leaf node (no children). Centers inner content of GridElement
+![Centered](docs/centered.png "Centered")
