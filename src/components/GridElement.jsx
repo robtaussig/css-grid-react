@@ -30,7 +30,6 @@ module.exports = class GridElement extends React.Component {
 
   generateStyle(store) {
     const elementInfo = getElementInfoFromStore(store, this.props);
-    // console.log(store, this.props);
     if (elementInfo) {
       const elementStyle = getElementStyle(elementInfo);
       const propertyModifiers = this.applyPropertyModifiers();
