@@ -1,3 +1,5 @@
+import merge from 'deepmerge';
+
 export const ensureTypeArray = (element) => {
   return Array.isArray(element) ? element : [element];
 };
@@ -227,4 +229,9 @@ export const getElementStyle = (elementInfo) => {
 
 export const elementHasGridChildren = (props) => {
   return typeof props.children !== 'string' && props.children && props.children.length > 0;
+};
+
+export const deepMergeObject = (left, right) => {
+  const merged = merge(left, right);
+  return merged;
 };

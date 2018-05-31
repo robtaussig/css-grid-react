@@ -4,8 +4,11 @@ const {
   ensureTypeArray,
   getInformationFromChildren,
   getRowTemplateFromChildren,
-  getColumnTemplateFromChildren
+  getColumnTemplateFromChildren,
+  deepMergeObject
 } = require('../helpers/');
+
+let storeCache = {};
 
 module.exports = class Grid extends React.Component {
   constructor(props) {
@@ -15,11 +18,19 @@ module.exports = class Grid extends React.Component {
         
       }
     };
+    
     this.generateStyle = this.generateStyle.bind(this);
+    this.handleReceiveStore = this.handleReceiveStore.bind(this);
+    this.handleStorePropogation = this.handleStorePropogation.bind(this);
   }
 
-  componentDidMount() {
-    this.generateGridStore();
+  componentDidMount() {    
+    if (this.props.propogateStore) {
+      const nextGridStore = this.generateGridStore(true);
+      this.handleStorePropogation(nextGridStore);
+    } else {
+      this.generateGridStore();
+    }
   }
 
   generateStyle() {
@@ -32,12 +43,26 @@ module.exports = class Grid extends React.Component {
     };
   }
 
-  generateGridStore() {    
+  handleReceiveStore(nextGridStore) {
+    storeCache = deepMergeObject(storeCache, nextGridStore);
+    this.setState({
+      store: storeCache
+    });
+  }
+
+  handleStorePropogation(nextGridStore) {    
+    this.props.propogateStore(nextGridStore);
+  }
+
+  generateGridStore(simulateOnly = false) {    
     const children = ensureTypeArray(this.props.children);
     const nextGridStore = getInformationFromChildren(children, this.props.columns);
+    
+    if (simulateOnly) return nextGridStore;
 
+    storeCache = deepMergeObject(storeCache, nextGridStore);
     this.setState({
-      store: nextGridStore
+      store: storeCache
     });
   }
 
@@ -50,8 +75,18 @@ module.exports = class Grid extends React.Component {
   }
 
   render() {
+    if (this.props.propogateStore) {
+      return (
+        <div style={this.generateStyle()}>
+          {this.props.children}
+        </div>
+      );
+    }
     return (
-      <Provider value={this.state.store}>
+      <Provider value={{
+        store: this.state.store,
+        receiveStore: this.handleReceiveStore
+      }}>
         <div style={this.generateStyle()}>
           {this.props.children}
         </div>
