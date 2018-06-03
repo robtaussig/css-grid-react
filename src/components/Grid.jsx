@@ -1,5 +1,6 @@
 const React = require('react');
 const { Provider } = require('./GridContext.jsx');
+const PropTypes = require('prop-types');
 const {
   ensureTypeArray,
   getInformationFromChildren,
@@ -10,7 +11,7 @@ const {
 
 let storeCache = {};
 
-module.exports = class Grid extends React.Component {
+class Grid extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,6 +41,8 @@ module.exports = class Grid extends React.Component {
       gridTemplate: gridTemplate,
       height: '100%',
       width: '100%',
+      gap: this.props.gap,
+      gridAutoFlow: this.props.columns ? 'column' : 'row',
     };
   }
 
@@ -71,7 +74,7 @@ module.exports = class Grid extends React.Component {
     const rows = getRowTemplateFromChildren(children);
     const columns = getColumnTemplateFromChildren(children);
 
-    return this.props.columns ? `${columns} / ${rows}` : `${rows} / ${columns}`;
+    return `${rows} / ${columns}`;
   }
 
   render() {
@@ -93,4 +96,18 @@ module.exports = class Grid extends React.Component {
       </Provider>      
     );
   }
+}
+
+Grid.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]).isRequired,
+  columns: PropTypes.bool,
+  rows: PropTypes.bool,
+  gap: PropTypes.string,  
 };
+
+Grid.defaultProps = {
+  rows: true,
+  columns: false,
+};
+
+module.exports = Grid;

@@ -1,4 +1,5 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const { Consumer } = require('./GridContext.jsx');
 const Grid = require('./Grid.jsx');
 const {
@@ -7,7 +8,7 @@ const {
   elementHasGridChildren
 } = require('../helpers/');
 
-module.exports = class GridElement extends React.Component {
+class GridElement extends React.Component {
   constructor(props) {
     super(props);
     this.generateStyle = this.generateStyle.bind(this);
@@ -47,7 +48,7 @@ module.exports = class GridElement extends React.Component {
             <Grid columns={Boolean(this.props.columns)} propogateStore={receiveStore}>
               {this.props.children}
             </Grid>
-          </div>) : 
+          </div>) :
           (
             <div style={this.generateStyle(store)}>
               {this.props.children}
@@ -57,4 +58,25 @@ module.exports = class GridElement extends React.Component {
       </Consumer>
     );
   }
+}
+
+GridElement.propTypes = {
+  gridKey: PropTypes.any.isRequired,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  children: PropTypes.node.isRequired,
+  outlined: PropTypes.bool,
+  centered: PropTypes.bool,
+  columns: PropTypes.bool,
 };
+
+GridElement.defaultProps = {
+  children: '',
+  width: '1fr',
+  height: '1fr',
+  outlined: false,
+  centered: true,
+  columns: false,
+};
+
+module.exports = GridElement;

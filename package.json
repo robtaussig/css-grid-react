@@ -1,6 +1,6 @@
 {
   "name": "css-grid-components",
-  "version": "1.0.14",
+  "version": "1.0.16",
   "description": "Get the benefits and flexibility of CSS Grid through lightweight react components",
   "main": "build/index.js",
   "scripts": {
@@ -26,11 +26,13 @@
     "url": "https://github.com/robtaussig/css-grid-react/issues"
   },
   "homepage": "https://github.com/robtaussig/css-grid-react#readme",
+  "peerDependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  },
   "dependencies": {
     "deepmerge": "^2.1.1",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "webpack": "^4.10.1"
+    "prop-types": "^15.6.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -39,6 +41,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.5.1",
+    "webpack": "^4.10.1",
     "webpack-command": "^0.2.0"
   }
 }

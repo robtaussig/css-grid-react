@@ -187,10 +187,6 @@ export const getRowTemplateFromChildren = (children) => {
 
 export const getColumnTemplateFromChildren = (children) => {
   return children
-    .reduce((acc, child) => {
-      const grandChildren = ensureTypeArray(child.props.children);
-      return grandChildren.length > acc.length ? grandChildren : acc;
-    }, [])
     .map(child => child.props && child.props.width || '1fr')
     .join(' ');
 };
@@ -203,9 +199,6 @@ export const getElementInfoFromStore = (store, props) => {
 
 export const getElementStyle = (elementInfo) => {
   const elementStyle = {};
-  const rowHasOwnChild = () => {
-    return elementInfo.row.numChildren === 1;
-  };
   const startsAsColumn = () => {
     return elementInfo.column.asColumn;
   };
